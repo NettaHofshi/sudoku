@@ -4,5 +4,4 @@
 int main(){
 	printf("Enter:\n");
 	printf("heydad");
-	printf("test");
 }
