@@ -10,7 +10,7 @@ int checkNumOfCellsToFill (int range){
 	while (fillCells<0 || fillCells>80){
 		printf("Error: invalid number of cells to fill (should be between 0 and 80)\n");
 		printf("Please enter the number of cells to fill [0-80]:\n");
-		scanf("%d%",&fillCells);
+		scanf("%d",&fillCells);
 	}
-
+return 0;
 }
