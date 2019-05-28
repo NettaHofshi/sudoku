@@ -1,8 +1,10 @@
 
 #include <stdio.h>
+#include "SPBufferset.h"
+#include "Parser.h"
 
 int main(){
-	printf("Enter:\n");
-	printf("heydad");
-	printf("test");
+	SP_BUFF_SET();
+	getNewCommand();
+
 }
