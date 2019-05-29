@@ -1,11 +1,17 @@
 #include <stdio.h>
 #include <string.h>
 #define longestCommand 1024
+
 void parseSetCommand(char* firstLetter){
-printf("ok");
+	if (firstLetter[1]!= 'e' || firstLetter[2]!= 't'){
+		printf("exitSet");
+	}
+
+
 }
 
 void parseHintCommand(char* firstLetter){
+
 
 }
 void parseValidateCommand(char* firstLetter){
@@ -42,6 +48,9 @@ void getNewCommand (){
 	case 'e':   /*exit*/
 		parseExitCommand(firstLetter);
 		break;
+	default:
+		printf("exit");
+
 
 }
 }
