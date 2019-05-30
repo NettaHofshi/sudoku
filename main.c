@@ -54,17 +54,26 @@ int main(){
 			case 5:   /*exit*/
 				exitGame();
 				break;
-}
-		if (continueGame==1){  /* if exit*/
-			return 0;
 		}
-		if (continueGame==2){  /* if restart*/
-					main();
-				}
-		if (continueGame==3){  /* if board solved- game over, only restart or exit is poosible*/
-
-				}
-
-
-
 	}
+
+	if (continueGame==1){  /* if board solved- game over, only restart or exit is poosible*/
+		command= getNewCommand();
+		while (command->commandID==0 ||command->commandID==1||command->commandID==2||command->commandID==3){      /*only Exit and Restared are allowed*/
+			command= getNewCommand();
+		}
+		if (command->commandID==4 ){    /*restart*/
+			restart();
+		}
+		if(command->commandID==5){     /*exit*/
+			exit();
+		}
+	if (continueGame==2){  /* if restart*/
+		main();
+	}
+	else{  /*(continueGame==3)-- if exit*/
+		return 0;
+	}
+}
+
+}
