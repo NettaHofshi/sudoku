@@ -7,13 +7,13 @@ void printDashes(){
 		printf("\n");
 }
 
-void printCells(char board[][][], int index){
+void printCells(board[9][9][2], int index){
 	printf("|");
 	for(int k=0; k<3; k++){
 		for(int j=0; j<9; j++){
 			printf(" ");
 			for(int i=0; i<2; i++){
-				if(board[index][j][i] == null){ /*need to fix*/
+				if(board[index][j][i] == '0'){ /*need to fix*/
 					printf(" ");
 				}
 				else{
@@ -30,14 +30,14 @@ void printCells(char board[][][], int index){
 	printDashes();
 }
 
-void printBoard(char board[][][]){
+void printBoard(char board[9][9][2]){
 	printDashes();
 	printCells(board, 0);
 	printCells(board, 3);
 	printCells(board, 6);
 }
 
-int columnValid(int column, int value, char board[][][]){
+int columnValid(int column, int value, char board[9][9][2]){
 	for(int i=0; i<9; i++){
 		if(board[i][column][1] == value){
 			return 0;
@@ -46,7 +46,7 @@ int columnValid(int column, int value, char board[][][]){
 	return 1;
 }
 
-int rowValid(int row, int value, char board[][][]){
+int rowValid(int row, int value, char board[9][9][2]){
 	for(int i=0; i<9; i++){
 		if(board[row][i][1] == value){
 			return 0;
@@ -55,15 +55,15 @@ int rowValid(int row, int value, char board[][][]){
 	return 1;
 }
 
-int squareValid(int column, int row, int value, char board[][][]){
+int squareValid(int column, int row, int value, char board[9][9][2]){
 	/*need to implement*/
 	return 1;
 }
 
-int gameOver(char board[][][]){
+int gameOver(char board[9][9][2]){
 	for(int i=0; i<9; i++){
 		for(int j=0; j<9; j++){
-			if(board[i][j][1] == null){
+			if(board[i][j][1] == 0){
 				return 0;
 			}
 		}
@@ -71,8 +71,8 @@ int gameOver(char board[][][]){
 	return 1;
 }
 
-void SetMove (int column, int row, int value, char board[][][]){
-	if(board[row-1][column-1][0] == "."){
+void SetMove (int column, int row, int value, char board[9][9][2]){
+	if(board[row-1][column-1][0] == '.'){
 		printf("Error: cell is fixed\n");
 	}
 	else if(columnValid(column-1, value, board)==0){
@@ -89,14 +89,14 @@ void SetMove (int column, int row, int value, char board[][][]){
 		board[row-1][column-1][1]=value;
 	}
 	else{
-		board[row-1][column-1][1] = null;
+		board[row-1][column-1][1] = '0';
 	}
 	if(gameOver(board) == 1){
 		printf("Puzzle solved successfully\n");
 	}
 }
 
-char hint(int column, int row, char board[][][]){
+char hint(int column, int row, char board[9][9][2]){
 	return board[row-1][column-1][1];
 }
 

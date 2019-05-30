@@ -3,6 +3,10 @@
 #define longestCommand 1024
 
 void parseSetCommand(char* firstLetter){
+	int x=4;
+	if (x==NULL){
+
+	}
 	if (firstLetter[1]!= 'e' || firstLetter[2]!= 't'){
 		printf("exitSet");
 	}
@@ -49,7 +53,8 @@ void getNewCommand (){
 		parseExitCommand(firstLetter);
 		break;
 	default:
-		printf("exit");
+		printf("Error: invalid command\n");
+		getNewCommand ();
 
 
 }
