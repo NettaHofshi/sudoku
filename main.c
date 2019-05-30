@@ -5,7 +5,7 @@
 #include "Game.h"
 
 int main(){
-	/*
+
 	char board[9][9][2];
 	for( int i=0; i<9; i++){
 		for( int j=0; j<9; j++){
@@ -14,7 +14,7 @@ int main(){
 		}
 	}
 	printBoard(board*);
-	*/
+
 	SP_BUFF_SET();
 
 
@@ -71,4 +71,5 @@ int main(){
 		if (continueGame==3){  /* if board solved- game over, only restart or exit is poosible*/
 
 				}
+
 	}

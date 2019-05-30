@@ -7,7 +7,7 @@ void printDashes(){
 		printf("\n");
 }
 
-void printCells(board[9][9][2], int index){
+void printCells(char board[][9][2], int index){
 	printf("|");
 	for(int k=0; k<3; k++){
 		for(int j=0; j<9; j++){
@@ -30,14 +30,14 @@ void printCells(board[9][9][2], int index){
 	printDashes();
 }
 
-void printBoard(char board[9][9][2]){
+void printBoard(char board[][9][2]){
 	printDashes();
 	printCells(board, 0);
 	printCells(board, 3);
 	printCells(board, 6);
 }
 
-int columnValid(int column, int value, char board[9][9][2]){
+int columnValid(int column, int value, char board[][9][2]){
 	for(int i=0; i<9; i++){
 		if(board[i][column][1] == value){
 			return 0;
@@ -46,7 +46,7 @@ int columnValid(int column, int value, char board[9][9][2]){
 	return 1;
 }
 
-int rowValid(int row, int value, char board[9][9][2]){
+int rowValid(int row, int value, char board[][9][2]){
 	for(int i=0; i<9; i++){
 		if(board[row][i][1] == value){
 			return 0;
@@ -55,12 +55,12 @@ int rowValid(int row, int value, char board[9][9][2]){
 	return 1;
 }
 
-int squareValid(int column, int row, int value, char board[9][9][2]){
+int squareValid(int column, int row, int value, char board[][9][2]){
 	/*need to implement*/
 	return 1;
 }
 
-int gameOver(char board[9][9][2]){
+int gameOver(char board[][9][2]){
 	for(int i=0; i<9; i++){
 		for(int j=0; j<9; j++){
 			if(board[i][j][1] == 0){
@@ -71,7 +71,7 @@ int gameOver(char board[9][9][2]){
 	return 1;
 }
 
-void SetMove (int column, int row, int value, char board[9][9][2]){
+void SetMove (int column, int row, int value, char board[][9][2]){
 	if(board[row-1][column-1][0] == '.'){
 		printf("Error: cell is fixed\n");
 	}
@@ -96,7 +96,7 @@ void SetMove (int column, int row, int value, char board[9][9][2]){
 	}
 }
 
-char hint(int column, int row, char board[9][9][2]){
+char hint(int column, int row, char board[][9][2]){
 	return board[row-1][column-1][1];
 }
 
