@@ -3,35 +3,26 @@
 #include "SPBufferset.h"
 #include "Parser.h"
 #include "Game.h"
+#include "MainAux.h"
 
 int main(){
 
-	char board[9][9][2];
-	for( int i=0; i<9; i++){
-		for( int j=0; j<9; j++){
-			board[i][j][0]='.';
-			board[i][j][1]='2';
-		}
-	}
-	printBoard(board*);
+	int numOfCellToFill;
+	int continueGame=0;
+	Command* command;
+	char gameBoard [9][9][2];
+	char solvedBoard [9][9][2];
 
 	SP_BUFF_SET();
 
-
-	int numOfCellToFill,i,j;
-	int continueGame=0;
-	char * command;
-	char gameBoard [9][9][2];
 	for( int i=0; i<9; i++){       /*start the board with 0*/
 		for( int j=0; j<9; j++){
+			solvedBoard[i][j][0]='.';
+			solvedBoard[i][j][1]='0';
 			gameBoard[i][j][0]='.';
 			gameBoard[i][j][1]='0';
-
-	char solvedBoard [9][9][2];
-		for( int i=0; i<9; i++){       /*start the board with 0*/
-			for( int j=0; j<9; j++){
-				solvedBoard[i][j][0]='.';
-				solvedBoard[i][j][1]='0';
+			}
+		}
 
 	printf("Please enter the number of cells to fill [0-80]:\n");
 
@@ -42,24 +33,26 @@ int main(){
 	createBoard(gameBoard,solvedBoard,numOfCellToFill);
 
 	while (continueGame==0){
+		printBoard(gameBoard);        /*???*/
 		command= getNewCommand();
-		/* extract values from array*/
-
-		switch (command[0]){
-			case '1':  /*set*/
-				setMove(command[1],command[2],command[3], gameBoard);
+		while (command->commandID=='0'){      /*the user wrote a non valid command*/
+			command= getNewCommand();
+		}
+		switch (command->commandID){
+			case 1:  /*set*/
+				setMove(command->column_X,command->row_Y,command->value_Z, gameBoard);
 				break;
-			case '2':   /*hint*/
-				parseHintCommand(firstLetter);
+			case 2:   /*hint*/
+				hint(command->column_X,command->row_Y, gameBoard)
 				break;
-			case '3':   /*validate*/
-				parseValidateCommand(firstLetter);
+			case 3:   /*validate*/
+				validate(gameBoard)
 				break;
-			case '4':   /*restart*/
-				parseRestartCommand(firstLetter);
+			case 4:   /*restart*/
+				restart();
 				break;
-			case '5':   /*exit*/
-				parseExitCommand(firstLetter);
+			case 5:   /*exit*/
+				exitGame();
 				break;
 }
 		if (continueGame==1){  /* if exit*/
@@ -71,5 +64,7 @@ int main(){
 		if (continueGame==3){  /* if board solved- game over, only restart or exit is poosible*/
 
 				}
+
+
 
 	}
