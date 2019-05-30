@@ -4,6 +4,7 @@
 #include "Parser.h"
 #include "Game.h"
 #include "MainAux.h"
+#include "Solver.h"
 
 int main(){
 
@@ -15,7 +16,7 @@ int main(){
 
 	SP_BUFF_SET();
 
-	for( int i=0; i<9; i++){       /*start the board with 0*/
+	for( int i=0; i<9; i++){       /*start the board with .0*/
 		for( int j=0; j<9; j++){
 			solvedBoard[i][j][0]='.';
 			solvedBoard[i][j][1]='0';
@@ -43,10 +44,10 @@ int main(){
 				setMove(command->column_X,command->row_Y,command->value_Z, gameBoard);
 				break;
 			case 2:   /*hint*/
-				hint(command->column_X,command->row_Y, gameBoard)
+				hint(command->column_X,command->row_Y, gameBoard);
 				break;
 			case 3:   /*validate*/
-				validate(gameBoard)
+				validate(gameBoard);
 				break;
 			case 4:   /*restart*/
 				restart();
@@ -66,7 +67,7 @@ int main(){
 			restart();
 		}
 		if(command->commandID==5){     /*exit*/
-			exit();
+			exitGame();
 		}
 	if (continueGame==2){  /* if restart*/
 		main();
