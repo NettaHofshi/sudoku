@@ -96,8 +96,8 @@ void SetMove (int column, int row, int value, char board[][9][2]){
 	}
 }
 
-char hint(int column, int row, char board[][9][2]){
-	return board[row-1][column-1][1];   /*hii!! i think you should print it not return*/
+void hint(int column, int row, char board[][9][2]){
+	printf("%c", board[row-1][column-1][1]);
 }
 
 
