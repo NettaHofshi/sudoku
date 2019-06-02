@@ -78,8 +78,7 @@ while(restartValue==1){
 		}
 
 		if(command->commandID==5){
-			printf("ggggg");
-			exit();
+			exitGame();
 			return 0;
 		}
 	}
@@ -89,8 +88,7 @@ while(restartValue==1){
 		restart(res);
 	}
 	if(continueGame==3){   /*(continueGame==3)-- if exit*/
-		printf("fffff\n");
-		exit();
+		exitGame();
 		return 0;
 	}
 }

@@ -109,7 +109,7 @@ void restart (int *restartValue){
 	*restartValue = 1;
 }
 
-void exit(){
+void exitGame(){
 	printf("Exiting...\n");
 }
 

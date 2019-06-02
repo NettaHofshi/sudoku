@@ -10,7 +10,7 @@ int rowValid(int row, int value, char board[][9][2]);
 int columnValid(int column, int value, char board[][9][2]);
 void printCells(char board[][9][2], int index);
 void printDashes();
-void exit();
+void exitGame();
 void restart(int* restar);
 
 
