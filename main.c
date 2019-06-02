@@ -38,7 +38,7 @@ while(restartValue==1){
 	createBoard(gameBoard,solvedBoard,numOfCellToFill);
 
 	while (continueGame==0){
-		printBoard(gameBoard);
+		/*printBoard(gameBoard);*/
 		command= getNewCommand();
 		while (command->commandID==0){      /*the user wrote a non valid command*/
 			command= getNewCommand();
@@ -78,18 +78,20 @@ while(restartValue==1){
 		}
 
 		if(command->commandID==5){
+			printf("ggggg");
 			exit();
 			return 0;
 		}
+	}
 
 
 	if (continueGame==2){  /* if restart*/
 		restart(res);
 	}
-	else{                   /*(continueGame==3)-- if exit*/
+	if(continueGame==3){   /*(continueGame==3)-- if exit*/
+		printf("fffff\n");
 		exit();
 		return 0;
-	}
 	}
 }
 return 0;
