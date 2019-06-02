@@ -1,7 +1,7 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-void SetMove (int column, int row, int value, char board[][9][2]);
+void setMove (int column, int row, int value, char board[][9][2]);
 void printBoard(char board[][9][2]);
 char hint(int column, int row, char board[][9][2]);
 int gameOver(char board[][9][2]);

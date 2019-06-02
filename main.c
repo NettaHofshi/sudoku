@@ -7,8 +7,8 @@
 #include "Solver.h"
 
 int main(){
-
-	int numOfCellToFill;
+	int i,j;
+	int numOfCellToFill=0;
 	int continueGame=0;
 	Command* command;
 	char gameBoard [9][9][2];
@@ -16,8 +16,8 @@ int main(){
 
 	SP_BUFF_SET();
 
-	for( int i=0; i<9; i++){       /*start the board with .0*/
-		for( int j=0; j<9; j++){
+	for( i=0; i<9; i++){       /*start the board with .0*/
+		for( j=0; j<9; j++){
 			solvedBoard[i][j][0]='.';
 			solvedBoard[i][j][1]='0';
 			gameBoard[i][j][0]='.';
@@ -47,13 +47,13 @@ int main(){
 				hint(command->column_X,command->row_Y, gameBoard);
 				break;
 			case 3:   /*validate*/
-				validate(gameBoard);
+				/*validate(gameBoard);*/
 				break;
 			case 4:   /*restart*/
-				restart();
+				/*restart();*/
 				break;
 			case 5:   /*exit*/
-				exitGame();
+				/*exitGame();*/
 				break;
 		}
 	}
@@ -63,18 +63,21 @@ int main(){
 		while (command->commandID==0 ||command->commandID==1||command->commandID==2||command->commandID==3){      /*only Exit and Restared are allowed*/
 			command= getNewCommand();
 		}
-		if (command->commandID==4 ){    /*restart*/
+		/*
+		if (command->commandID==4 ){
 			restart();
 		}
-		if(command->commandID==5){     /*exit*/
+		if(command->commandID==5){
 			exitGame();
 		}
+		*/
 	if (continueGame==2){  /* if restart*/
 		main();
 	}
 	else{  /*(continueGame==3)-- if exit*/
 		return 0;
 	}
+	}
+return 0;
 }
 
-}
