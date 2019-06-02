@@ -36,7 +36,7 @@ int main(){
 	while (continueGame==0){
 		printBoard(gameBoard);        /*???*/
 		command= getNewCommand();
-		while (command->commandID=='0'){      /*the user wrote a non valid command*/
+		while (command->commandID==0){      /*the user wrote a non valid command*/
 			command= getNewCommand();
 		}
 		switch (command->commandID){
