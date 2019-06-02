@@ -105,4 +105,12 @@ void hint(int column, int row, char board[][9][2]){
 	printf("%c\n", board[row-1][column-1][1]);
 }
 
+void restart (int *restartValue){
+	*restartValue = 1;
+}
+
+void exit(){
+	printf("Exiting...\n");
+}
+
 

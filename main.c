@@ -7,7 +7,8 @@
 #include "Solver.h"
 
 int main(){
-	int i,j;
+	int i,j, restartValue=1;
+	int *res = &restartValue;
 	int numOfCellToFill=0;
 	int continueGame=0;
 	Command* command;
@@ -25,7 +26,9 @@ int main(){
 			}
 		}
 
-
+while(restartValue==1){
+	restartValue=0;
+	continueGame=0;
 	printf("Please enter the number of cells to fill [0-80]:\n");
 
 	if(checkNumOfCellsToFill(80)==99){
@@ -51,13 +54,16 @@ int main(){
 				/*validate(gameBoard);*/
 				break;
 			case 4:   /*restart*/
-				/*restart();*/
+				restart(res);
+				continueGame=2;
 				break;
 			case 5:   /*exit*/
-				/*exitGame();*/
+				continueGame=3;
 				break;
 		}
 	}
+
+
 	if (continueGame==1){  /* if board solved- game over, only restart or exit is poosible*/
 		command= getNewCommand();
 		while (command->commandID==0 ||command->commandID==1||command->commandID==2||command->commandID==3){      /*only Exit and Restared are allowed*/
@@ -66,21 +72,26 @@ int main(){
 			}
 			command= getNewCommand();
 		}
-		/*
+
 		if (command->commandID==4 ){
-			restart();
+			restart(res);
 		}
+
 		if(command->commandID==5){
-			exitGame();
+			exit();
+			return 0;
 		}
-		*/
+
+
 	if (continueGame==2){  /* if restart*/
-		main();
+		restart(res);
 	}
 	else{                   /*(continueGame==3)-- if exit*/
+		exit();
 		return 0;
 	}
 	}
+}
 return 0;
 }
 

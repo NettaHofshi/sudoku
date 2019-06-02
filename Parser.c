@@ -33,7 +33,7 @@ Command* getNewCommand (){
 	switch (commandWord[0]){
 	case 's':  /*set*/
 		if (commandWord[1]!= 'e' || commandWord[2]!= 't'){
-			printf("Error: invalid command");
+			printf("Error: invalid command\n");
 			returnedCommand.commandID= 0 ;   /*0= not valid command*/
 			break;
 		}
@@ -44,7 +44,7 @@ Command* getNewCommand (){
 		break;
 	case 'h':   /*hint*/
 		if (commandWord[1]!= 'i' || commandWord[2]!= 'n' || commandWord[3]!= 't'){
-			printf("Error: invalid command");
+			printf("Error: invalid command\n");
 			returnedCommand.commandID= 0 ;   /*0= not valid command*/
 			break;
 				}
@@ -54,7 +54,7 @@ Command* getNewCommand (){
 		break;
 	case 'v':   /*validate*/
 		if (commandWord[1]!= 'a' || commandWord[2]!= 'l' || commandWord[3]!= 'i'){
-			printf("Error: invalid command");
+			printf("Error: invalid command\n");
 			returnedCommand.commandID= 0 ;   /*0= not valid command*/
 			break;
 		}
@@ -63,7 +63,7 @@ Command* getNewCommand (){
 		break;
 	case 'r':   /*restart*/
 		if (commandWord[1]!= 'e' || commandWord[2]!= 's' || commandWord[3]!= 't'|| commandWord[4]!= 'a'|| commandWord[5]!= 'r'|| commandWord[6]!= 't'){
-			printf("Error: invalid command");
+			printf("Error: invalid command\n");
 			returnedCommand.commandID= 0 ;   /*0= not valid command*/
 			break;
 		}
@@ -72,7 +72,7 @@ Command* getNewCommand (){
 		break;
 	case 'e':   /*exit*/
 		if (commandWord[1]!= 'x' || commandWord[2]!= 'i' || commandWord[3]!= 't'){
-			printf("Error: invalid command");
+			printf("Error: invalid command\n");
 			returnedCommand.commandID= 0 ;   /*0= not valid command*/
 			break;
 		}
