@@ -18,12 +18,13 @@ int main(){
 
 	for( i=0; i<9; i++){       /*start the board with .0*/
 		for( j=0; j<9; j++){
-			solvedBoard[i][j][0]='.';
-			solvedBoard[i][j][1]='0';
-			gameBoard[i][j][0]='.';
-			gameBoard[i][j][1]='0';
+			solvedBoard[i][j][0]=' ';
+			solvedBoard[i][j][1]=' ';
+			gameBoard[i][j][0]=' ';
+			gameBoard[i][j][1]=' ';
 			}
 		}
+
 
 	printf("Please enter the number of cells to fill [0-80]:\n");
 
@@ -34,7 +35,7 @@ int main(){
 	createBoard(gameBoard,solvedBoard,numOfCellToFill);
 
 	while (continueGame==0){
-		printBoard(gameBoard);        /*???*/
+		printBoard(gameBoard);
 		command= getNewCommand();
 		while (command->commandID==0){      /*the user wrote a non valid command*/
 			command= getNewCommand();
@@ -44,7 +45,7 @@ int main(){
 				setMove(command->column_X,command->row_Y,command->value_Z, gameBoard);
 				break;
 			case 2:   /*hint*/
-				hint(command->column_X,command->row_Y, gameBoard);
+				hint(command->column_X,command->row_Y, solvedBoard);
 				break;
 			case 3:   /*validate*/
 				/*validate(gameBoard);*/
@@ -57,10 +58,12 @@ int main(){
 				break;
 		}
 	}
-
 	if (continueGame==1){  /* if board solved- game over, only restart or exit is poosible*/
 		command= getNewCommand();
 		while (command->commandID==0 ||command->commandID==1||command->commandID==2||command->commandID==3){      /*only Exit and Restared are allowed*/
+			if (command->commandID==1||command->commandID==2||command->commandID==3){
+				printf("Error: invalid command\n");
+			}
 			command= getNewCommand();
 		}
 		/*
@@ -74,7 +77,7 @@ int main(){
 	if (continueGame==2){  /* if restart*/
 		main();
 	}
-	else{  /*(continueGame==3)-- if exit*/
+	else{                   /*(continueGame==3)-- if exit*/
 		return 0;
 	}
 	}

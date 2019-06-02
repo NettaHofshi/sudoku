@@ -68,7 +68,7 @@ int gameOver(char board[][9][2]){
 	int i,j;
 	for(i=0; i<9; i++){
 		for(j=0; j<9; j++){
-			if(board[i][j][1] == '0'){
+			if(board[i][j][1] == ' '){
 				return 0;
 			}
 		}
@@ -94,7 +94,7 @@ void setMove (int column, int row, char value, char board[][9][2]){
 		board[row-1][column-1][1]=value;
 	}
 	else{
-		board[row-1][column-1][1] = '0';
+		board[row-1][column-1][1] = ' ';
 	}
 	if(gameOver(board) == 1){
 		printf("Puzzle solved successfully\n");
@@ -102,7 +102,7 @@ void setMove (int column, int row, char value, char board[][9][2]){
 }
 
 void hint(int column, int row, char board[][9][2]){
-	printf("%c", board[row-1][column-1][1]);
+	printf("%c\n", board[row-1][column-1][1]);
 }
 
 
