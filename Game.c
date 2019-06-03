@@ -19,7 +19,7 @@ void printCells(char board[][9][2], int index){
 					printf(" ");
 				}
 				else{
-					printf("%c",board[index][j][i]);
+					printf("%d",board[index][j][i]);
 				}
 			}
 			if(j%3 == 2){

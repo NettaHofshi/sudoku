@@ -20,9 +20,9 @@ int main(){
 	for( i=0; i<9; i++){       /*start the board with .0*/
 		for( j=0; j<9; j++){
 			solvedBoard[i][j][0]=' ';
-			solvedBoard[i][j][1]=' ';
+			solvedBoard[i][j][1]='3';
 			gameBoard[i][j][0]=' ';
-			gameBoard[i][j][1]=' ';
+			gameBoard[i][j][1]='3';
 			}
 		}
 
@@ -38,7 +38,7 @@ while(restartValue==1){
 	createBoard(gameBoard,solvedBoard,numOfCellToFill);
 
 	while (continueGame==0){
-		/*printBoard(gameBoard);*/
+		printBoard(gameBoard);
 		command= getNewCommand();
 		while (command->commandID==0){      /*the user wrote a non valid command*/
 			command= getNewCommand();
