@@ -7,7 +7,7 @@
 #include "MainAux.h"
 #include "Solver.h"
 
-int main(){
+int main(int argc, char *argv[]){
 	int i,j, restartValue=1;
 	int *res = &restartValue;
 	int numOfCellToFill=0;
@@ -16,7 +16,7 @@ int main(){
 	char gameBoard [9][9][2];
 	char solvedBoard [9][9][2];
 	SP_BUFF_SET();
-
+	/*srand(argv[0]);*/
 	for( i=0; i<9; i++){       /*start the board with .0--- need to delete this*/
 		for( j=0; j<9; j++){
 			solvedBoard[i][j][0]=' ';
@@ -26,7 +26,7 @@ int main(){
 			}
 		}
 
-gameBoard[0][0][1]='3';
+
 while(restartValue==1){
 	restartValue=0;
 	continueGame=0;
@@ -40,6 +40,7 @@ while(restartValue==1){
 
 	while (continueGame==0){
 		printBoard(gameBoard);  /*gameboard*/
+		printBoard(solvedBoard);
 		command= getNewCommand(gameBoard);
 		while (command->commandID==0){      /*the user wrote a non valid command*/
 			command= getNewCommand(gameBoard);

@@ -26,29 +26,29 @@ int rowValid(int column, int row, char value, char board[][9][2]){
 }
 
 int squareCheck(int column, int row){
-	if(row<4){
-		if(column<4){
+	if(row<3){
+		if(column<3){
 			return 1;
 		}
-		else if(column<7){
+		else if(column<6){
 			return 2;
 		}
 		return 3;
 	}
-	else if(row<7){
-		if(column<4){
+	else if(row<6){
+		if(column<3){
 			return 4;
 		}
-		else if(column<7){
+		else if(column<6){
 			return 5;
 		}
 		return 6;
 	}
 	else{
-		if(column<4){
+		if(column<3){
 			return 7;
 		}
-		else if(column<7){
+		else if(column<6){
 			return 8;
 		}
 		return 9;
@@ -98,7 +98,7 @@ int squareValid(int column, int row, char value, char board[][9][2]){
 	column2= column1+3;
 	for(i=row1; i<row2; i++){
 		for(j=column1; j<column2; j++){
-			if(i!=(row-1) && j!=(column-1)){
+			if(i!=(row) || j!=(column)){
 				if(value == board[i][j][1]){
 					return 0;
 				}
@@ -166,37 +166,28 @@ int findEmptyCell (char tempBoard[][9][2],int *curRow, int *curColumn,int *prevR
 	return 1; /*board is full*/
 }
 
-int findSolution(char tempBoard[][9][2],int rowFirstBlank, int columnFirstBlank, int q){
-	int curRow,curColumn;
-	int prevRow, prevColumn;
-	int i;
-	int lastPrevCellValue;
-	if (q==1){
-		printBoard(tempBoard);
-	}
+int findSolution(char tempBoard[][9][2] ) {
+	int value = 1;
+	int row = 0, col = 0;
 
-	if (findEmptyCell(tempBoard,&curRow, &curColumn, &prevRow, &prevColumn)==1){ /*if ==1 no empty cells- success!*/
-			return 1;
-		}
-	for (i=1; i<10; i++){   /*try to put value in empty call*/
-		if(allValid(curColumn+1,curRow+1,i+'0', tempBoard, 0)==1){
-			tempBoard[curRow][curColumn][1]=i+'0';
-			findSolution(tempBoard,rowFirstBlank,columnFirstBlank, q++);
-		}
-	}
+	if (gameOver(tempBoard) == 1)
+		return 1;
 
-	if (rowFirstBlank==prevRow && columnFirstBlank==prevColumn && tempBoard[prevRow][prevColumn][1]=='9'){ /*no solution*/
-		return 0;
-		}
-	lastPrevCellValue= tempBoard[prevRow][prevColumn][1]-47;
-	for (; lastPrevCellValue<10; lastPrevCellValue++){   /*try to put a new value in the previous cell*/
-		if(allValid(prevColumn+1,prevRow+1,lastPrevCellValue+'0', tempBoard, 0)==1){
-			tempBoard[curRow][curColumn][1]=lastPrevCellValue+'0';
-			findSolution(tempBoard,rowFirstBlank,columnFirstBlank, q++);
+	for (; row < 9; row++) {
+		for (col = 0; col < 9; col++) {
+			if (tempBoard[row][col][1] == '0' && tempBoard[row][col][0]== ' ') {
+				for (value = 1; value <= 9; value++) {
+					if (allValid(col+1,row+1,value+'0',tempBoard,0)==1) {
+						tempBoard[row][col][1] = value+'0';
+						if (findSolution(tempBoard))
+							return 1;
+					}
+				}
+				tempBoard[row][col][1] = '0';
+				return 0;
+			}
 		}
 	}
-	tempBoard[prevRow][prevColumn][1]='0';
-	findSolution(tempBoard,rowFirstBlank,columnFirstBlank, q++);
-return 1;
+	return 1;
 }
 
