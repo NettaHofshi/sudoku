@@ -8,7 +8,7 @@
 #include "Solver.h"
 
 int main(){
-	int i,j, restartValue=1, k;
+	int i,j, restartValue=1;
 	int *res = &restartValue;
 	int numOfCellToFill=0;
 	int continueGame=0;
@@ -20,11 +20,12 @@ int main(){
 	for( i=0; i<9; i++){       /*start the board with .0--- need to delete this*/
 		for( j=0; j<9; j++){
 			solvedBoard[i][j][0]=' ';
-			solvedBoard[i][j][1]='3';
+			solvedBoard[i][j][1]='0';
 			gameBoard[i][j][0]=' ';
-			gameBoard[i][j][1]='3';
+			gameBoard[i][j][1]='0';
 			}
 		}
+gameBoard[0][0][1]='3';
 
 while(restartValue==1){
 	restartValue=0;
@@ -39,14 +40,17 @@ while(restartValue==1){
 
 	while (continueGame==0){
 		printBoard(gameBoard);
-		printf("%d\n",gameBoard[0][0][1]);
-		command= getNewCommand();
+		command= getNewCommand(gameBoard);
 		while (command->commandID==0){      /*the user wrote a non valid command*/
-			command= getNewCommand();
+			command= getNewCommand(gameBoard);
 		}
 		switch (command->commandID){
 			case 1:  /*set*/
 				setMove(command->column_X,command->row_Y,command->value_Z, gameBoard);
+				if(gameOver(gameBoard) == 1){
+					printf("Puzzle solved successfully\n");
+					continueGame=1;
+				}
 				break;
 			case 2:   /*hint*/
 				hint(command->column_X,command->row_Y, solvedBoard);
@@ -66,12 +70,12 @@ while(restartValue==1){
 
 
 	if (continueGame==1){  /* if board solved- game over, only restart or exit is poosible*/
-		command= getNewCommand();
+		command= getNewCommand(gameBoard);
 		while (command->commandID==0 ||command->commandID==1||command->commandID==2||command->commandID==3){      /*only Exit and Restared are allowed*/
 			if (command->commandID==1||command->commandID==2||command->commandID==3){
 				printf("Error: invalid command\n");
 			}
-			command= getNewCommand();
+			command= getNewCommand(gameBoard);
 		}
 
 		if (command->commandID==4 ){

@@ -5,7 +5,7 @@
 #define longestCommand 1024
 
 
-Command* getNewCommand (){
+Command* getNewCommand (char gameBoard[][9][2]){
 	int i=0;
 	char* commandWord;        /*will hold the command word*/
 	char* instructChar;
@@ -41,6 +41,9 @@ Command* getNewCommand (){
 		returnedCommand.column_X= instructChars[0]-48;    /*X- column*/
 		returnedCommand.row_Y= instructChars[1]-48;        /*Y- row*/
 		returnedCommand.value_Z=instructChars[2];            /*Z- value*/
+		if (allValid(returnedCommand.column_X,returnedCommand.row_Y,returnedCommand.value_Z,gameBoard)==0){
+			returnedCommand.commandID= 0;
+		}
 		break;
 	case 'h':   /*hint*/
 		if (commandWord[1]!= 'i' || commandWord[2]!= 'n' || commandWord[3]!= 't'){

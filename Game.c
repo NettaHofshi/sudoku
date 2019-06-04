@@ -53,23 +53,11 @@ int gameOver(char board[][9][2]){
 }
 
 void setMove (int column, int row, char value, char board[][9][2]){
-	if(board[row-1][column-1][0] == '.'){
-		printf("Error: cell is fixed\n");
-	}
-	else if(columnValid(column-1, value, board)==0){
-		printf("Error: value is invalid\n");
-	}
-	/* call set again? */
-	else if(rowValid(row-1, value, board)==0){
-		printf("Error: value is invalid\n");
-	}
-	else if(squareValid(column-1, row-1, value, board)==0){
-		printf("Error: value is invalid\n");
-	}
-	else if(value!='0'){
+	if(value!='0'){
 		board[row-1][column-1][1]=value;
 	}
 	else{
+		/*if we put '0' when delete, then this is useless*/
 		board[row-1][column-1][1] = '0';
 	}
 	if(gameOver(board) == 1){
@@ -89,4 +77,23 @@ void exitGame(){
 	printf("Exiting...\n");
 }
 
-
+void validate(char gameBoard[][9][2],char solvedBoard[][9][2]){
+	char tempBoard [9][9][2];
+	int row=0,column=0;
+	for (int i=0; i<9; i++){
+		for (int j=0; j<9; j++){
+			tempBoard [i][j][1]= gameBoard[i][j][1];
+			if(tempBoard [i][j][1]!='0'){
+				tempBoard [i][j][0]='.';
+			}
+			else{
+				tempBoard [i][j][0]=' ';
+				if (row==0 & column==0){
+					row=i;
+					column=j;
+				}
+				}
+			}
+		}
+	findSolution(tempBoard,row,column, 1);
+}

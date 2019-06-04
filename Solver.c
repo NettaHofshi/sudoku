@@ -103,7 +103,25 @@ int squareValid(int column, int row, char value, char board[][9][2]){
 }
 
 
-
+int allValid(int column, int row, char value, char board[][9][2]){
+	if(columnValid(column-1, value, board)==0){
+		printf("Error: value is invalid\n");
+		return 0;
+	}
+	if(rowValid(row-1, value, board)==0){
+		printf("Error: value is invalid\n");
+		return 0;
+	}
+	if(squareValid(column-1, row-1, value, board)==0){
+		printf("Error: value is invalid\n");
+		return 0;
+	}
+	if(board[row-1][column-1][0] == '.'){
+		printf("Error: cell is fixed\n");
+		return 0;
+	}
+	return 1;
+}
 
 void createBoard(char gameBoard[][9][2],char solvedBoard[][9][2],int numOfCellToFill){
 
@@ -116,8 +134,55 @@ void emptyCells(char gameBoard[][9][2],char solvedBoard[][9][2],int numOfCellToF
  *
  */
 }
+int findEmptyCell (char tempBoard[][9][2],int* curRow, int* curColumn,int* prevRow, int* prevColumn){
+	int k;
+	for (k=0; k<9; k++){   /*findint the first empty cell*/
+			for (int t=0; t<9; t++){
+				if (tempBoard[k][t][0]==' '&&tempBoard[k][t][1]!='0'){
+					prevRow*=k;
+					prevColumn*=t;
+				}
+				if (tempBoard[k][t][1]=='0'){
+					curRow*=k;
+					curColumn*=t;
+					return 0;  /*found the first empty cell*/
+				}
+		}
+	return 1; /*board is full*/
+}
+}
 
-void solveBoard(char gameBoard[][9][2],char solvedBoard[][9][2]){
+int findSolution(char tempBoard[][9][2],int rowFirstBlank, int columnFirstBlank, int firstCall){
+	int curRow,curColumn;
+	int prevRow, prevColumn;
+	int i;
+	int lastCellValue;
+	if (firstCall==0){
+		if (findEmptyCell(tempBoard,*curRow, *curColumn, *prevRow, *prevColumn)==1){ /*if ==1 no empty cells- success!*/
+			return 1;
+		}
+	}
+	if(firstCall==0){
+		if (rowFirstBlank==curRow && columnFirstBlank==curColumn && tempBoard[curRow][curColumn][1]=='9'){ /*no solution*/
+			return 0;
+		}
+	}
 
+	for (i=1; i<10; i++){   /*try to put value in empty call*/
+		if(allValid(curColumn,curRow,i+'0', tempBoard)==1){
+			tempBoard[curRow][curColumn][1]=i+'0';
+			findSolution(tempBoard,rowFirstBlank,columnFirstBlank, 0);
+		}
+	}
+	lastCellValue= tempBoard[prevRow][prevColumn][1]-47;
+	for (; lastCellValue<10; lastCellValue++){   /*try to put a new value in the previous cell*/
+		if(allValid(prevColumn,prevRow,lastCellValue+'0', tempBoard)==1){
+			tempBoard[curRow][curColumn][1]=lastCellValue+'0';
+			findSolution(tempBoard,rowFirstBlank,columnFirstBlank,0);
+		}
+	}
+	tempBoard[prevRow][prevColumn][1]='0';
+	findSolution(tempBoard,rowFirstBlank,columnFirstBlank,0);
+return 0;
 }
 

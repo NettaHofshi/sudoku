@@ -11,6 +11,6 @@ typedef struct {
 	char value_Z;
 }Command;
 
-Command* getNewCommand ();
+Command* getNewCommand (char board[][9][2]);
 
 #endif /* PARSER_H_ */
