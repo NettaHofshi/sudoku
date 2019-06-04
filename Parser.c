@@ -40,7 +40,7 @@ Command* getNewCommand (){
 		returnedCommand.commandID=1;                /*1= setMove*/
 		returnedCommand.column_X= instructChars[0]-48;    /*X- column*/
 		returnedCommand.row_Y= instructChars[1]-48;        /*Y- row*/
-		returnedCommand.value_Z=instructChars[2]-48;            /*Z- value*/
+		returnedCommand.value_Z=instructChars[2];            /*Z- value*/
 		break;
 	case 'h':   /*hint*/
 		if (commandWord[1]!= 'i' || commandWord[2]!= 'n' || commandWord[3]!= 't'){

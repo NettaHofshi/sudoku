@@ -39,6 +39,7 @@ while(restartValue==1){
 
 	while (continueGame==0){
 		printBoard(gameBoard);
+		printf("%d\n",gameBoard[0][0][1]);
 		command= getNewCommand();
 		while (command->commandID==0){      /*the user wrote a non valid command*/
 			command= getNewCommand();
