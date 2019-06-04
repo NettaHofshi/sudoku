@@ -1,19 +1,25 @@
+#include <stdio.h>
+#include <string.h>
 
-int columnValid(int column, char value, char board[][9][2]){
+int columnValid(int column,int row, char value, char board[][9][2]){
 	int i;
 	for(i=0; i<9; i++){
-		if(board[i][column][1] == value){
-			return 0;
+		if(i!=row){
+				if(board[i][column][1] == value){
+					return 0;
+				}
 		}
 	}
 	return 1;
 }
 
-int rowValid(int row, char value, char board[][9][2]){
+int rowValid(int column, int row, char value, char board[][9][2]){
 	int i;
 	for(i=0; i<9; i++){
-		if(board[row][i][1] == value){
-			return 0;
+		if(i!=column){
+			if(board[row][i][1] == value){
+				return 0;
+			}
 		}
 	}
 	return 1;
@@ -103,21 +109,29 @@ int squareValid(int column, int row, char value, char board[][9][2]){
 }
 
 
-int allValid(int column, int row, char value, char board[][9][2]){
-	if(columnValid(column-1, value, board)==0){
-		printf("Error: value is invalid\n");
+int allValid(int column, int row, char value, char board[][9][2], int whichFuncCalled){
+	if(columnValid(column-1,row-1, value, board)==0){
+		if(whichFuncCalled==1){ /*parser called*/
+			printf("Error: value is invalid\n");
+		}
 		return 0;
 	}
-	if(rowValid(row-1, value, board)==0){
-		printf("Error: value is invalid\n");
+	if(rowValid(column-1, row-1, value, board)==0){
+		if(whichFuncCalled==1){ /*parser called*/
+			printf("Error: value is invalid\n");
+		}
 		return 0;
 	}
 	if(squareValid(column-1, row-1, value, board)==0){
-		printf("Error: value is invalid\n");
+		if(whichFuncCalled==1){ /*parser called*/
+			printf("Error: value is invalid\n");
+		}
 		return 0;
 	}
 	if(board[row-1][column-1][0] == '.'){
-		printf("Error: cell is fixed\n");
+		if(whichFuncCalled==1){ /*parser called*/
+			printf("Error: cell is fixed\n");
+		}
 		return 0;
 	}
 	return 1;
@@ -152,19 +166,22 @@ int findEmptyCell (char tempBoard[][9][2],int *curRow, int *curColumn,int *prevR
 	return 1; /*board is full*/
 }
 
-int findSolution(char tempBoard[][9][2],int rowFirstBlank, int columnFirstBlank){
+int findSolution(char tempBoard[][9][2],int rowFirstBlank, int columnFirstBlank, int q){
 	int curRow,curColumn;
 	int prevRow, prevColumn;
 	int i;
 	int lastPrevCellValue;
+	if (q==1){
+		printBoard(tempBoard);
+	}
+
 	if (findEmptyCell(tempBoard,&curRow, &curColumn, &prevRow, &prevColumn)==1){ /*if ==1 no empty cells- success!*/
 			return 1;
 		}
-
 	for (i=1; i<10; i++){   /*try to put value in empty call*/
-		if(allValid(curColumn,curRow,i+'0', tempBoard)==1){
+		if(allValid(curColumn+1,curRow+1,i+'0', tempBoard, 0)==1){
 			tempBoard[curRow][curColumn][1]=i+'0';
-			findSolution(tempBoard,rowFirstBlank,columnFirstBlank);
+			findSolution(tempBoard,rowFirstBlank,columnFirstBlank, q++);
 		}
 	}
 
@@ -173,13 +190,13 @@ int findSolution(char tempBoard[][9][2],int rowFirstBlank, int columnFirstBlank)
 		}
 	lastPrevCellValue= tempBoard[prevRow][prevColumn][1]-47;
 	for (; lastPrevCellValue<10; lastPrevCellValue++){   /*try to put a new value in the previous cell*/
-		if(allValid(prevColumn,prevRow,lastPrevCellValue+'0', tempBoard)==1){
+		if(allValid(prevColumn+1,prevRow+1,lastPrevCellValue+'0', tempBoard, 0)==1){
 			tempBoard[curRow][curColumn][1]=lastPrevCellValue+'0';
-			findSolution(tempBoard,rowFirstBlank,columnFirstBlank);
+			findSolution(tempBoard,rowFirstBlank,columnFirstBlank, q++);
 		}
 	}
 	tempBoard[prevRow][prevColumn][1]='0';
-	findSolution(tempBoard,rowFirstBlank,columnFirstBlank);
-return 0;
+	findSolution(tempBoard,rowFirstBlank,columnFirstBlank, q++);
+return 1;
 }
 

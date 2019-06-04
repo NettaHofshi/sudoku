@@ -25,8 +25,8 @@ int main(){
 			gameBoard[i][j][1]='0';
 			}
 		}
-gameBoard[0][0][1]='3';
 
+gameBoard[0][0][1]='3';
 while(restartValue==1){
 	restartValue=0;
 	continueGame=0;
@@ -39,7 +39,7 @@ while(restartValue==1){
 	createBoard(gameBoard,solvedBoard,numOfCellToFill);
 
 	while (continueGame==0){
-		printBoard(gameBoard);
+		printBoard(gameBoard);  /*gameboard*/
 		command= getNewCommand(gameBoard);
 		while (command->commandID==0){      /*the user wrote a non valid command*/
 			command= getNewCommand(gameBoard);
@@ -56,7 +56,7 @@ while(restartValue==1){
 				hint(command->column_X,command->row_Y, solvedBoard);
 				break;
 			case 3:   /*validate*/
-				/*validate(gameBoard);*/
+				validate(gameBoard, solvedBoard);
 				break;
 			case 4:   /*restart*/
 				restart(res);

@@ -97,7 +97,7 @@ void validate(char gameBoard[][9][2],char solvedBoard[][9][2]){
 				}
 			}
 		}
-	if(findSolution(tempBoard,firstEmptyRow,firstEmptyColumn)==1){
+	if(findSolution(tempBoard,firstEmptyRow,firstEmptyColumn,1)==1){
 		for (i=0; i<9; i++){
 				for (j=0; j<9; j++){
 					solvedBoard [i][j][1]= tempBoard[i][j][1];

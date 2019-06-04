@@ -41,7 +41,7 @@ Command* getNewCommand (char gameBoard[][9][2]){
 		returnedCommand.column_X= instructChars[0]-48;    /*X- column*/
 		returnedCommand.row_Y= instructChars[1]-48;        /*Y- row*/
 		returnedCommand.value_Z=instructChars[2];            /*Z- value*/
-		if (allValid(returnedCommand.column_X,returnedCommand.row_Y,returnedCommand.value_Z,gameBoard)==0){
+		if (allValid(returnedCommand.column_X,returnedCommand.row_Y,returnedCommand.value_Z,gameBoard, 1)==0){
 			returnedCommand.commandID= 0;
 		}
 		break;
