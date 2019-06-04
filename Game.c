@@ -94,58 +94,42 @@ int squareValid(int column, int row, char value, char board[][9][2]){
 	int i,j,row1,row2,column1,column2;
 	if(square==1){
 		row1=0;
-		row2=3;
 		column1=0;
-		column2=3;
 	}
 	else if(square==2){
 		row1=0;
-		row2=3;
 		column1=3;
-		column2=6;
 	}
 	else if(square==3){
 		row1=0;
-		row2=3;
 		column1=6;
-		column2=9;
 	}
 	else if(square==4){
 		row1=3;
-		row2=6;
 		column1=0;
-		column2=3;
 	}
 	else if(square==5){
 		row1=3;
-		row2=6;
 		column1=3;
-		column2=6;
 	}
 	else if(square==6){
 		row1=3;
-		row2=6;
 		column1=6;
-		column2=9;
 	}
 	else if(square==7){
 		row1=6;
-		row2=9;
 		column1=0;
-		column2=3;
 	}
 	else if(square==8){
 		row1=6;
-		row2=9;
 		column1=3;
-		column2=6;
 	}
 	else{
 		row1=6;
-		row2=9;
 		column1=6;
-		column2=9;
 	}
+	row2=row1+3;
+	column2= column1+3;
 	for(i=row1; i<row2; i++){
 		for(j=column1; j<column2; j++){
 			if(i!=(row-1) && j!=(column-1)){
