@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "solver.h"
 
 void printDashes(){
 	int i;
@@ -66,7 +67,7 @@ void setMove (int column, int row, char value, char board[][9][2]){
 }
 
 void hint(int column, int row, char board[][9][2]){
-	printf("%c\n", board[row-1][column-1][1]);
+	printf("Hint: set cell to %c\n", board[row-1][column-1][1]);
 }
 
 void restart (int *restartValue){
@@ -78,22 +79,33 @@ void exitGame(){
 }
 
 void validate(char gameBoard[][9][2],char solvedBoard[][9][2]){
+	int i,j;
 	char tempBoard [9][9][2];
-	int row=0,column=0;
-	for (int i=0; i<9; i++){
-		for (int j=0; j<9; j++){
+	int firstEmptyRow=99,firstEmptyColumn=99;
+	for (i=0; i<9; i++){
+		for (j=0; j<9; j++){
 			tempBoard [i][j][1]= gameBoard[i][j][1];
 			if(tempBoard [i][j][1]!='0'){
 				tempBoard [i][j][0]='.';
 			}
 			else{
 				tempBoard [i][j][0]=' ';
-				if (row==0 & column==0){
-					row=i;
-					column=j;
+				if (firstEmptyRow==99 && firstEmptyColumn==99){
+					firstEmptyRow=i;
+					firstEmptyColumn=j;
 				}
 				}
 			}
 		}
-	findSolution(tempBoard,row,column, 1);
+	if(findSolution(tempBoard,firstEmptyRow,firstEmptyColumn)==1){
+		for (i=0; i<9; i++){
+				for (j=0; j<9; j++){
+					solvedBoard [i][j][1]= tempBoard[i][j][1];
+				}
+		}
+		printf("Validation passed: board is solvable\n");
+	}
+	else{
+		printf("Validation failed: board is unsolvable\n");
+	}
 }

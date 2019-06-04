@@ -134,55 +134,52 @@ void emptyCells(char gameBoard[][9][2],char solvedBoard[][9][2],int numOfCellToF
  *
  */
 }
-int findEmptyCell (char tempBoard[][9][2],int* curRow, int* curColumn,int* prevRow, int* prevColumn){
-	int k;
+int findEmptyCell (char tempBoard[][9][2],int *curRow, int *curColumn,int *prevRow, int *prevColumn){
+	int k,t;
 	for (k=0; k<9; k++){   /*findint the first empty cell*/
-			for (int t=0; t<9; t++){
-				if (tempBoard[k][t][0]==' '&&tempBoard[k][t][1]!='0'){
-					prevRow*=k;
-					prevColumn*=t;
+			for (t=0; t<9; t++){
+				if (tempBoard[k][t][0]==' '&& tempBoard[k][t][1]!='0'){
+					*prevRow=k;
+					*prevColumn=t;
 				}
 				if (tempBoard[k][t][1]=='0'){
-					curRow*=k;
-					curColumn*=t;
+					*curRow=k;
+					*curColumn=t;
 					return 0;  /*found the first empty cell*/
 				}
 		}
+	}
 	return 1; /*board is full*/
 }
-}
 
-int findSolution(char tempBoard[][9][2],int rowFirstBlank, int columnFirstBlank, int firstCall){
+int findSolution(char tempBoard[][9][2],int rowFirstBlank, int columnFirstBlank){
 	int curRow,curColumn;
 	int prevRow, prevColumn;
 	int i;
-	int lastCellValue;
-	if (firstCall==0){
-		if (findEmptyCell(tempBoard,*curRow, *curColumn, *prevRow, *prevColumn)==1){ /*if ==1 no empty cells- success!*/
+	int lastPrevCellValue;
+	if (findEmptyCell(tempBoard,&curRow, &curColumn, &prevRow, &prevColumn)==1){ /*if ==1 no empty cells- success!*/
 			return 1;
 		}
-	}
-	if(firstCall==0){
-		if (rowFirstBlank==curRow && columnFirstBlank==curColumn && tempBoard[curRow][curColumn][1]=='9'){ /*no solution*/
-			return 0;
-		}
-	}
 
 	for (i=1; i<10; i++){   /*try to put value in empty call*/
 		if(allValid(curColumn,curRow,i+'0', tempBoard)==1){
 			tempBoard[curRow][curColumn][1]=i+'0';
-			findSolution(tempBoard,rowFirstBlank,columnFirstBlank, 0);
+			findSolution(tempBoard,rowFirstBlank,columnFirstBlank);
 		}
 	}
-	lastCellValue= tempBoard[prevRow][prevColumn][1]-47;
-	for (; lastCellValue<10; lastCellValue++){   /*try to put a new value in the previous cell*/
-		if(allValid(prevColumn,prevRow,lastCellValue+'0', tempBoard)==1){
-			tempBoard[curRow][curColumn][1]=lastCellValue+'0';
-			findSolution(tempBoard,rowFirstBlank,columnFirstBlank,0);
+
+	if (rowFirstBlank==prevRow && columnFirstBlank==prevColumn && tempBoard[prevRow][prevColumn][1]=='9'){ /*no solution*/
+		return 0;
+		}
+	lastPrevCellValue= tempBoard[prevRow][prevColumn][1]-47;
+	for (; lastPrevCellValue<10; lastPrevCellValue++){   /*try to put a new value in the previous cell*/
+		if(allValid(prevColumn,prevRow,lastPrevCellValue+'0', tempBoard)==1){
+			tempBoard[curRow][curColumn][1]=lastPrevCellValue+'0';
+			findSolution(tempBoard,rowFirstBlank,columnFirstBlank);
 		}
 	}
 	tempBoard[prevRow][prevColumn][1]='0';
-	findSolution(tempBoard,rowFirstBlank,columnFirstBlank,0);
+	findSolution(tempBoard,rowFirstBlank,columnFirstBlank);
 return 0;
 }
 
