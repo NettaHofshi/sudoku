@@ -1,5 +1,6 @@
 
 #include <stdio.h>
+#include <time.h>
 #include "SPBufferset.h"
 #include "Parser.h"
 #include "Game.h"
@@ -14,10 +15,9 @@ int main(){
 	Command* command;
 	char gameBoard [9][9][2];
 	char solvedBoard [9][9][2];
-
 	SP_BUFF_SET();
 
-	for( i=0; i<9; i++){       /*start the board with .0*/
+	for( i=0; i<9; i++){       /*start the board with .0--- need to delete this*/
 		for( j=0; j<9; j++){
 			solvedBoard[i][j][0]=' ';
 			solvedBoard[i][j][1]='3';
