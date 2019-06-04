@@ -15,11 +15,11 @@ void printCells(char board[][9][2], int index){
 		for(j=0; j<9; j++){
 			printf(" ");
 			for(i=0; i<2; i++){
-				if(board[index][j][i] == '0'){ /*need to fix*/
+				if(board[index][j][i] == '0'){
 					printf(" ");
 				}
 				else{
-					printf("%d",board[index][j][i]);
+					printf("%c",board[index][j][i]);
 				}
 			}
 			if(j%3 == 2){
