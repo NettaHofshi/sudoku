@@ -8,7 +8,7 @@
 #include "Solver.h"
 
 int main(){
-	int i,j, restartValue=1;
+	int i,j, restartValue=1, k;
 	int *res = &restartValue;
 	int numOfCellToFill=0;
 	int continueGame=0;
