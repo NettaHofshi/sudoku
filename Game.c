@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "solver.h"
 
+/*
+ * prints 34 '-' and '\n' in the end
+ */
 void printDashes(){
 	int i;
 	for(i=0; i<34; i++){
@@ -9,6 +12,10 @@ void printDashes(){
 		printf("\n");
 }
 
+/*
+ * prints three blocks of the board of the game
+ * the three blocks are in the same rows
+ */
 void printCells(char board[][9][2], int index){
 	int k,j,i;
 	for(k=0; k<3; k++){
