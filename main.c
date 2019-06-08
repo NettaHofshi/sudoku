@@ -9,13 +9,14 @@
 #include "Solver.h"
 
 int main(int argc, char *argv[]){
-	int i,j, restartValue=1;
+	int i,j,k, restartValue=1, l;
 	int *res = &restartValue;
 	int numOfCellToFill=0;
 	int continueGame=0;
 	Command* command;
 	char gameBoard [9][9][2];
 	char solvedBoard [9][9][2];
+	char tempBoard[9][9][10];
 	SP_BUFF_SET();
 	if (argc>=1){
 		srand(atoi(argv[1]));      /*the seed*/
@@ -27,10 +28,19 @@ int main(int argc, char *argv[]){
 			solvedBoard[i][j][1]='0';
 			gameBoard[i][j][0]=' ';
 			gameBoard[i][j][1]='0';
+			for(k=0;k<10;k++){
+				tempBoard[i][j][k]='0';
 			}
 		}
-
-
+		}
+	/*
+tempBoard[0][0][9]='1';
+tempBoard[0][1][9]='2';
+tempBoard[0][2][9]='3';
+tempBoard[1][0][9]='4';
+l=createOptions(tempBoard,1,2);
+printf("%d\n%c\n", l,tempBoard[1][2][0] );
+*/
 while(restartValue==1){
 	restartValue=0;
 	continueGame=0;
@@ -40,10 +50,11 @@ while(restartValue==1){
 		return 0;
 	}
 
-	createBoard(gameBoard,solvedBoard,numOfCellToFill);
+	startBoard(tempBoard,gameBoard,solvedBoard,numOfCellToFill);
+	printBoard(solvedBoard);
 
 	while (continueGame==0){
-		printBoard(gameBoard);  /*gameboard*/
+		printBoard(gameBoard);
 		/*printBoard(solvedBoard);*/
 		command= getNewCommand(gameBoard);
 		if (command==NULL){

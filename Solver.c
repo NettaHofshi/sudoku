@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include "game.h"
 
 int columnValid(int column,int row, char value, char board[][9][2]){
 	int i;
@@ -137,17 +139,102 @@ int allValid(int column, int row, char value, char board[][9][2], int whichFuncC
 	return 1;
 }
 
-void createBoard(char gameBoard[][9][2],char solvedBoard[][9][2],int numOfCellToFill){
+int createOptions(char tempBoard[][9][10], int row, int col){
+	int i=0, j=0, index=0;
+	char boardForValid[9][9][2];
+	for(i=0; i<9; i++){
+			for(j=0; j<9; j++){
+				boardForValid[i][j][1]='0';
+			}
+	}
+	for(i=0; i<9; i++){
+		for(j=0; j<9; j++){
+
+			boardForValid[i][j][1] = tempBoard[i][j][9];
+		}
+	}
+	for(i=1;i<10;i++){
+		if(allValid(col+1, row+1, i+'0', boardForValid, 0)==1){
+			tempBoard[row][col][index]=i+'0';
+			index++;
+		}
+	}
+	return index;
+}
+
+
+
+int createBoard(char tempBoard[][9][10]){
+	int row=0, col=0, randomIndex=0, numOfOptions=0, i=0, j=0, temp=0,k=0;
+	char val;
+	if(tempBoard[8][8][9]!='0' ){
+		return 1;
+	}
+	for (;row<9; row++){
+		for(col=0; col<9; col++){
+			if(tempBoard[row][col][9]=='0'){
+				numOfOptions= createOptions(tempBoard, row, col);
+				temp = numOfOptions;
+
+				for(j=0;j<temp;j++){
+					if (numOfOptions==1){
+						randomIndex=0;
+					}
+					else{
+					randomIndex= rand()%numOfOptions;
+					}
+					val=tempBoard[row][col][randomIndex];
+					tempBoard[row][col][9]=val;
+					if(createBoard(tempBoard)==1){
+						return 1;
+					}
+					for(i=0;i<9;i++){/*updates array*/
+						if(tempBoard[row][col][i]==tempBoard[row][col][9]){
+							for(k=i;k<9;k++){
+								tempBoard[row][col][k]=tempBoard[row][col][k+1];
+							}
+							tempBoard[row][col][8]='0';
+						}
+					}
+					numOfOptions =numOfOptions-1;
+
+					}
+
+				for(i=0;i<10;i++){
+					tempBoard[row][col][i]='0';
+				}
+				return 0;
+			}
+		}
+	}
+
+	return 1;
+}
+
+
+
+void fillGameBoardCells(char gameBoard[][9][2],char solvedBoard[][9][2],int numOfCellToFill){
+	for i=0 until i=81-numOfCellsToFill do
+		rand X , rand Y
+		if cell(X,Y) not empty- empty him. and replace the fixed sign "." with " "; (in both boards)
+		if already empty, rand again.
+
 
 }
-void emptyCells(char gameBoard[][9][2],char solvedBoard[][9][2],int numOfCellToFill){
-/*for i=0 until i=81-numOfCellsToFill do
- * rand X , rand Y
- * if cell(X,Y) not empty- empty him. and replace the fixed sign "." with " "; (in both boards)
- * if already empty, rand again.
- *
- */
+
+void startBoard (char tempBoard[][9][10],char gameBoard[][9][2],char solvedBoard[][9][2], int numOfCellToFill){
+	int i=0,j=0,k=0;
+	createBoard(tempBoard);
+	for (i=0; i<9;i++){
+		for (j=0; j<9;j++){
+			solvedBoard[i][j][1]=tempBoard[i][j][9];
+
+		}
+	}
+
+	fillGameBoardCells(gameBoard,solvedBoard,numOfCellToFill);
 }
+
 int findEmptyCell (char tempBoard[][9][2],int *curRow, int *curColumn,int *prevRow, int *prevColumn){
 	int k,t;
 	for (k=0; k<9; k++){   /*findint the first empty cell*/
