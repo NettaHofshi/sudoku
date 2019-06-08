@@ -1,5 +1,20 @@
 #include <stdio.h>
 
+void initAllBoards(char gameBoard [][9][2],char solvedBoard [][9][2],char tempBoard[9][9][10]){
+	int i=0,j=0,k=0;
+	for( i=0; i<9; i++){       /*start the board with .0--- need to delete this*/
+		for( j=0; j<9; j++){
+			solvedBoard[i][j][0]=' ';
+			solvedBoard[i][j][1]='0';
+			gameBoard[i][j][0]=' ';
+			gameBoard[i][j][1]='0';
+			for(k=0;k<10;k++){
+				tempBoard[i][j][k]='0';
+			}
+		}
+		}
+}
+
 int checkNumOfCellsToFill (int range){
 	int fillCells;
 	if (feof(stdin)){

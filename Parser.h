@@ -30,6 +30,6 @@ typedef struct {
  * then according to the command format, it puts the parameters in a new Command and returns it to the Caller.
  */
 
-Command* getNewCommand (char board[][9][2]);
+Command* getNewCommand (char board[][9][2], int status);
 
 #endif /* PARSER_H_ */

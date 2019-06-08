@@ -69,9 +69,7 @@ void setMove (int column, int row, char value, char board[][9][2]){
 		/*if we put '0' when delete, then this is useless*/
 		board[row-1][column-1][1] = '0';
 	}
-	if(gameOver(board) == 1){
-		printf("Puzzle solved successfully\n");
-	}
+
 }
 
 void hint(int column, int row, char board[][9][2]){

@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "game.h"
+#include "MainAux.h"
 
 int columnValid(int column,int row, char value, char board[][9][2]){
 	int i;
@@ -112,6 +113,15 @@ int squareValid(int column, int row, char value, char board[][9][2]){
 
 
 int allValid(int column, int row, char value, char board[][9][2], int whichFuncCalled){
+	if(board[row-1][column-1][0] == '.'){
+		if(whichFuncCalled==1){ /*parser called*/
+			printf("Error: cell is fixed\n");
+		}
+		return 0;
+	}
+	if(value=='0'){
+		return 1;
+	}
 	if(columnValid(column-1,row-1, value, board)==0){
 		if(whichFuncCalled==1){ /*parser called*/
 			printf("Error: value is invalid\n");
@@ -127,12 +137,6 @@ int allValid(int column, int row, char value, char board[][9][2], int whichFuncC
 	if(squareValid(column-1, row-1, value, board)==0){
 		if(whichFuncCalled==1){ /*parser called*/
 			printf("Error: value is invalid\n");
-		}
-		return 0;
-	}
-	if(board[row-1][column-1][0] == '.'){
-		if(whichFuncCalled==1){ /*parser called*/
-			printf("Error: cell is fixed\n");
 		}
 		return 0;
 	}
@@ -214,16 +218,24 @@ int createBoard(char tempBoard[][9][10]){
 
 
 void fillGameBoardCells(char gameBoard[][9][2],char solvedBoard[][9][2],int numOfCellToFill){
-	for i=0 until i=81-numOfCellsToFill do
-		rand X , rand Y
-		if cell(X,Y) not empty- empty him. and replace the fixed sign "." with " "; (in both boards)
-		if already empty, rand again.
-
-
+	int i=0,x=0,y=0,tag=0;
+	for (i=0 ; i<numOfCellToFill; i++) {
+		tag=0;
+		while(tag==0){
+			x= rand()%9;
+			y= rand()%9;
+			if (gameBoard[x][y][0]!='.'){
+				gameBoard[x][y][0]='.';
+				gameBoard[x][y][1]= solvedBoard[x][y][1];
+				tag=1;
+			}
+		}
+}
 }
 
 void startBoard (char tempBoard[][9][10],char gameBoard[][9][2],char solvedBoard[][9][2], int numOfCellToFill){
-	int i=0,j=0,k=0;
+	int i=0,j=0;
+	initAllBoards(gameBoard,solvedBoard,tempBoard);
 	createBoard(tempBoard);
 	for (i=0; i<9;i++){
 		for (j=0; j<9;j++){

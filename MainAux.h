@@ -10,6 +10,8 @@
  *
  */
 int checkNumOfCellsToFill (int range);
+void initAllBoards(char gameBoard [][9][2],char solvedBoard [][9][2],char tempBoard[9][9][10]);
+
 
 #endif /* MAINAUX_H_ */
 

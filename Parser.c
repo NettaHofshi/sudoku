@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 #include "Parser.h"
+#include "Solver.h"
 #include "SPBufferset.h"
 #define longestCommand 1024
 
 
-Command* getNewCommand (char gameBoard[][9][2]){
+Command* getNewCommand (char gameBoard[][9][2], int status){
 	int i=0;
 	char* instructChar;
 	char* commandWord;                                 /*will hold the command word*/
@@ -44,8 +45,11 @@ Command* getNewCommand (char gameBoard[][9][2]){
 		returnedCommand.column_X= instructChars[0]-48;    /*X- column*/
 		returnedCommand.row_Y= instructChars[1]-48;        /*Y- row*/
 		returnedCommand.value_Z=instructChars[2];            /*Z- value*/
-		if (allValid(returnedCommand.column_X,returnedCommand.row_Y,returnedCommand.value_Z,gameBoard, 1)==0){
-			returnedCommand.commandID= 0;
+		if(status==0){
+			if (allValid(returnedCommand.column_X,returnedCommand.row_Y,returnedCommand.value_Z,gameBoard, 1)==0 ){
+
+				returnedCommand.commandID= 0;
+		}
 		}
 		break;
 	case 'h':   /*hint*/
@@ -59,7 +63,7 @@ Command* getNewCommand (char gameBoard[][9][2]){
 		returnedCommand.row_Y=instructChars[1]-48;        /*Y- row*/
 		break;
 	case 'v':   /*validate*/
-		if (commandWord[1]!= 'a' || commandWord[2]!= 'l' || commandWord[3]!= 'i' ){
+		if (commandWord[1]!= 'a' || commandWord[2]!= 'l' || commandWord[3]!= 'i' || commandWord[4]!= 'd'|| commandWord[5]!= 'a'|| commandWord[6]!= 't'|| commandWord[7]!= 'e'){
 			printf("Error: invalid command\n");
 			returnedCommand.commandID= 0 ;   /*0= not valid command*/
 			break;
