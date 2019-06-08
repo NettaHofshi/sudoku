@@ -7,25 +7,28 @@
 
 Command* getNewCommand (char gameBoard[][9][2]){
 	int i=0;
-	char* commandWord;        /*will hold the command word*/
 	char* instructChar;
-	char instructChars[longestCommand];     /*will hold all the chars after the command*/
+	char* commandWord;                                 /*will hold the command word*/
+	char instructChars[longestCommand];
 	Command returnedCommand;
 	Command* returnedCommand1;
-	char commandStr[longestCommand];
+	char commandStr[longestCommand];     /*will hold all the chars after the command*/
+
 	SP_BUFF_SET();
-	fgets (commandStr,longestCommand, stdin );
+	if(fgets (commandStr,longestCommand, stdin)==NULL ){
+		printf("Error: <fgets> has faild\n");
+		return NULL;
+	}
+
 	instructChar= strtok(commandStr," \t\r\n" );
 	commandWord= instructChar;
 	instructChar=strtok(NULL," \t\r\n" );
-	while(instructChar!= NULL ){
+	while(instructChar!= NULL ){                   /*put the chars in the array one by one*/
 		instructChars[i]=*instructChar;
-		i++;/*put the chars in the array one by one*/
+		i++;
 		instructChar=strtok(NULL," \t\r\n" );
-
-
 		}
-	returnedCommand.column_X=0;
+	returnedCommand.column_X=0;               /*initialize all the parameters in the Command*/
 	returnedCommand.commandID=0;
 	returnedCommand.row_Y=0;
 	returnedCommand.value_Z=0;
@@ -56,7 +59,7 @@ Command* getNewCommand (char gameBoard[][9][2]){
 		returnedCommand.row_Y=instructChars[1]-48;        /*Y- row*/
 		break;
 	case 'v':   /*validate*/
-		if (commandWord[1]!= 'a' || commandWord[2]!= 'l' || commandWord[3]!= 'i'){
+		if (commandWord[1]!= 'a' || commandWord[2]!= 'l' || commandWord[3]!= 'i' ){
 			printf("Error: invalid command\n");
 			returnedCommand.commandID= 0 ;   /*0= not valid command*/
 			break;

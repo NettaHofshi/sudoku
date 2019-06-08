@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "solver.h"
 
+
 void printDashes(){
 	int i;
 	for(i=0; i<34; i++){

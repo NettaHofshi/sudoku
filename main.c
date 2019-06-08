@@ -1,5 +1,6 @@
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include "SPBufferset.h"
 #include "Parser.h"
@@ -16,7 +17,10 @@ int main(int argc, char *argv[]){
 	char gameBoard [9][9][2];
 	char solvedBoard [9][9][2];
 	SP_BUFF_SET();
-	/*srand(argv[0]);*/
+	if (argc>=1){
+		srand(atoi(argv[1]));      /*the seed*/
+	}
+
 	for( i=0; i<9; i++){       /*start the board with .0--- need to delete this*/
 		for( j=0; j<9; j++){
 			solvedBoard[i][j][0]=' ';
@@ -40,8 +44,11 @@ while(restartValue==1){
 
 	while (continueGame==0){
 		printBoard(gameBoard);  /*gameboard*/
-		printBoard(solvedBoard);
+		/*printBoard(solvedBoard);*/
 		command= getNewCommand(gameBoard);
+		if (command==NULL){
+			return 0;
+		}
 		while (command->commandID==0){      /*the user wrote a non valid command*/
 			command= getNewCommand(gameBoard);
 		}

@@ -6,11 +6,18 @@ int checkNumOfCellsToFill (int range){
 		printf("Exiting...\n");
 		return 99;
 	}
-	scanf("%d",&fillCells); /*what if scanf fails???? */
+	if(scanf("%d",&fillCells)<=0){ /*what if scanf fails???? */
+		printf("Error: <scanf> has failed\n");
+		return 99;
+
+	}
 	while (fillCells<0 || fillCells>range){
 		printf("Error: invalid number of cells to fill (should be between 0 and 80)\n");
 		printf("Please enter the number of cells to fill [0-80]:\n");
-		scanf("%d",&fillCells);
+		if(scanf("%d",&fillCells)<=0){
+			printf("Error: <scanf> has failed\n");
+			return 99;
+		}
 	}
 
 return fillCells;
