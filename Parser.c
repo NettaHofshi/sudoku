@@ -1,3 +1,10 @@
+/*
+ * Parser.c
+ *
+ *  Created on: Jun 10, 2019
+ *      Author: yaellerech
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include "Parser.h"
@@ -10,14 +17,18 @@ Command* getNewCommand (char gameBoard[][9][2], int status){
 	int i=0;
 	char* instructChar;
 	char* commandWord;                                 /*will hold the command word*/
-	char instructChars[longestCommand];
+	char instructChars[3]={0};
 	Command returnedCommand;
 	Command* returnedCommand1;
-	char commandStr[longestCommand];     /*will hold all the chars after the command*/
+	char commandStr[longestCommand]={0};     /*will hold all the chars after the command*/
 
 	SP_BUFF_SET();
 	if(fgets (commandStr,longestCommand, stdin)==NULL ){
-		printf("Error: <fgets> has faild\n");
+		if (ferror(stdin)) {
+			printf("Error: <fgets> has faild\n");
+			return NULL;
+		}
+		printf("Exiting...\n");
 		return NULL;
 	}
 
@@ -34,6 +45,7 @@ Command* getNewCommand (char gameBoard[][9][2], int status){
 	returnedCommand.row_Y=0;
 	returnedCommand.value_Z=0;
 
+	fflush(stdout);
 	switch (commandWord[0]){
 	case 's':  /*set*/
 		if (commandWord[1]!= 'e' || commandWord[2]!= 't'){
@@ -41,12 +53,12 @@ Command* getNewCommand (char gameBoard[][9][2], int status){
 			returnedCommand.commandID= 0 ;   /*0= not valid command*/
 			break;
 		}
-		returnedCommand.commandID=1;                /*1= setMove*/
-		if (instructChars[0]<=48 || instructChars[0]>=58 || instructChars[1]<=48 || instructChars[1]>=58 || instructChars[2]<=48 || instructChars[2]>=58){
+		if(instructChars[0]<=48 || instructChars[0]>=58 || instructChars[1]<=48 || instructChars[1]>=58 || instructChars[2]<=48 || instructChars[2]>=58){
 			printf("Error: invalid command\n");
 			returnedCommand.commandID= 0 ;   /*0= not valid command*/
 			break;
 		}
+		returnedCommand.commandID=1;                /*1= setMove*/
 		returnedCommand.column_X= instructChars[0]-48;    /*X- column*/
 		returnedCommand.row_Y= instructChars[1]-48;        /*Y- row*/
 		returnedCommand.value_Z=instructChars[2];            /*Z- value*/
@@ -63,7 +75,7 @@ Command* getNewCommand (char gameBoard[][9][2], int status){
 			returnedCommand.commandID= 0 ;   /*0= not valid command*/
 			break;
 				}
-		if (instructChars[0]<=48 || instructChars[0]>=58 || instructChars[1]<=48 || instructChars[1]>=58){
+		if(instructChars[0]<=48 || instructChars[0]>=58 || instructChars[1]<=48 || instructChars[1]>=58 ){
 			printf("Error: invalid command\n");
 			returnedCommand.commandID= 0 ;   /*0= not valid command*/
 			break;

@@ -17,11 +17,12 @@ void initAllBoards(char gameBoard [][9][2],char solvedBoard [][9][2],char tempBo
 
 int checkNumOfCellsToFill (int range){
 	int fillCells;
-	if (feof(stdin)){
-		printf("Exiting...\n");
-		return 99;
-	}
+
 	if(scanf("%d",&fillCells)<=0){ /*what if scanf fails???? */
+		if (feof(stdin)){
+				printf("Exiting...\n");
+				return 99;
+		}
 		printf("Error: <scanf> has failed\n");
 		return 99;
 
