@@ -39,7 +39,7 @@ int findSolution(char tempBoard[][9][2]);
  */
 int allValid(int column, int row, char value, char board[][9][2], int whichFuncCalled);
 
-/*int createOptions(char tempBoard[][9][10], int row, int col);*/
+
 
 
 

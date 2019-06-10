@@ -285,8 +285,8 @@ void fillGameBoardCells(char gameBoard[][9][2],char solvedBoard[][9][2],int numO
 	for (i=0 ; i<numOfCellToFill; i++) {
 		tag=0;
 		while(tag==0){
-			x= rand()%9;
 			y= rand()%9;
+			x= rand()%9;
 			if (gameBoard[x][y][0]!='.'){
 				gameBoard[x][y][0]='.';
 				gameBoard[x][y][1]= solvedBoard[x][y][1];
@@ -313,10 +313,10 @@ void startBoard (char tempBoard[][9][10],char gameBoard[][9][2],char solvedBoard
 /*
  * to delete?????
 
- */
+
 int findEmptyCell (char tempBoard[][9][2],int *curRow, int *curColumn,int *prevRow, int *prevColumn){
 	int k,t;
-	for (k=0; k<9; k++){   /*findint the first empty cell*/
+	for (k=0; k<9; k++){
 			for (t=0; t<9; t++){
 				if (tempBoard[k][t][0]==' '&& tempBoard[k][t][1]!='0'){
 					*prevRow=k;
@@ -324,13 +324,13 @@ int findEmptyCell (char tempBoard[][9][2],int *curRow, int *curColumn,int *prevR
 				}
 				if (tempBoard[k][t][1]=='0'){
 					*curRow=k;
-					*curColumn=t;
-					return 0;  /*found the first empty cell*/
+					*curColumn=
 				}
 		}
 	}
-	return 1; /*board is full*/
+	return 1;
 }
+*/
 
 int findSolution(char tempBoard[][9][2] ) {
 	int value = 1;

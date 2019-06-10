@@ -9,7 +9,7 @@
 #include "Solver.h"
 
 int main(int argc, char *argv[]){
-	int restartValue=1;
+	int restartValue=1, printTag=1;
 	int *res = &restartValue;
 	int numOfCellToFill=0;
 	int continueGame=0;
@@ -34,7 +34,10 @@ while(restartValue==1){
 
 	startBoard(tempBoard,gameBoard,solvedBoard,numOfCellToFill);
 	while (continueGame==0){
-		printBoard(gameBoard);
+		if (printTag==1){
+			printBoard(gameBoard);
+		}
+		printTag=1;
 		command= getNewCommand(gameBoard,0);
 		if (command==NULL){
 			return 0;
@@ -46,14 +49,17 @@ while(restartValue==1){
 			case 1:  /*set*/
 				setMove(command->column_X,command->row_Y,command->value_Z, gameBoard);
 				if(gameOver(gameBoard) == 1){
+					printBoard(gameBoard);
 					printf("Puzzle solved successfully\n");
 					continueGame=1;
 				}
 				break;
 			case 2:   /*hint*/
+				printTag=0;
 				hint(command->column_X,command->row_Y, solvedBoard);
 				break;
 			case 3:   /*validate*/
+				printTag =0;
 				validate(gameBoard, solvedBoard);
 				break;
 			case 4:   /*restart*/

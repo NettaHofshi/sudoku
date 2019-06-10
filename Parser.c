@@ -42,6 +42,11 @@ Command* getNewCommand (char gameBoard[][9][2], int status){
 			break;
 		}
 		returnedCommand.commandID=1;                /*1= setMove*/
+		if (instructChars[0]<=48 || instructChars[0]>=58 || instructChars[1]<=48 || instructChars[1]>=58 || instructChars[2]<=48 || instructChars[2]>=58){
+			printf("Error: invalid command\n");
+			returnedCommand.commandID= 0 ;   /*0= not valid command*/
+			break;
+		}
 		returnedCommand.column_X= instructChars[0]-48;    /*X- column*/
 		returnedCommand.row_Y= instructChars[1]-48;        /*Y- row*/
 		returnedCommand.value_Z=instructChars[2];            /*Z- value*/
@@ -58,6 +63,11 @@ Command* getNewCommand (char gameBoard[][9][2], int status){
 			returnedCommand.commandID= 0 ;   /*0= not valid command*/
 			break;
 				}
+		if (instructChars[0]<=48 || instructChars[0]>=58 || instructChars[1]<=48 || instructChars[1]>=58){
+			printf("Error: invalid command\n");
+			returnedCommand.commandID= 0 ;   /*0= not valid command*/
+			break;
+		}
 		returnedCommand.commandID=2;                /*2= hint*/
 		returnedCommand.column_X= instructChars[0]-48;    /*X- column*/
 		returnedCommand.row_Y=instructChars[1]-48;        /*Y- row*/
