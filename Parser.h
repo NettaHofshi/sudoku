@@ -3,7 +3,7 @@
 #define PARSER_H_
 
 /*
- * struct- Command:
+ * Command stuct:
  * Describes a new command, and the parameters it holds.
  * if a command doesnt have all of the parameters, then it will hold garbish.
  *
@@ -21,13 +21,17 @@ typedef struct {
 }Command;
 
 /*
- * function- getNewCommand
+ * getNewCommand function:
  * gets a new command from the user and parse it so the program could use it.
  * board= the game board
  *
  * the function reads the users input and parse it to chars.
  * according to the firts letter it checks which command it is (or if its not a valid command)
  * then according to the command format, it puts the parameters in a new Command and returns it to the Caller.
+ *
+ * parameters-
+ * board- the game board
+ * status- determines if it is needed to check if is set value is valid (0) or not(1)
  */
 
 Command* getNewCommand (char board[][9][2], int status);

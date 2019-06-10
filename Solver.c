@@ -310,27 +310,6 @@ void startBoard (char tempBoard[][9][10],char gameBoard[][9][2],char solvedBoard
 	fillGameBoardCells(gameBoard,solvedBoard,numOfCellToFill);
 }
 
-/*
- * to delete?????
-
-
-int findEmptyCell (char tempBoard[][9][2],int *curRow, int *curColumn,int *prevRow, int *prevColumn){
-	int k,t;
-	for (k=0; k<9; k++){
-			for (t=0; t<9; t++){
-				if (tempBoard[k][t][0]==' '&& tempBoard[k][t][1]!='0'){
-					*prevRow=k;
-					*prevColumn=t;
-				}
-				if (tempBoard[k][t][1]=='0'){
-					*curRow=k;
-					*curColumn=
-				}
-		}
-	}
-	return 1;
-}
-*/
 
 int findSolution(char tempBoard[][9][2] ) {
 	int value = 1;
