@@ -31,7 +31,6 @@ while(restartValue==1){
 	if(numOfCellToFill==99){
 		return 0;
 	}
-
 	startBoard(tempBoard,gameBoard,solvedBoard,numOfCellToFill);
 	while (continueGame==0){
 		if (printTag==1){
@@ -39,7 +38,7 @@ while(restartValue==1){
 		}
 		printTag=1;
 		command= getNewCommand(gameBoard,0);
-		if (command==NULL){
+		if(command==NULL){
 			return 0;
 		}
 		while (command->commandID==0){      /*the user wrote a non valid command*/
@@ -68,6 +67,9 @@ while(restartValue==1){
 				break;
 			case 5:   /*exit*/
 				continueGame=3;
+				break;
+			case 6:
+				printTag=0;
 				break;
 		}
 	}
