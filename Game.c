@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "solver.h"
+#include "Solver.h"
 
 /*
  * prints 34 '-' and '\n' in the end
