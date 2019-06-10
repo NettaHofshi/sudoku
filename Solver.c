@@ -4,6 +4,16 @@
 #include "game.h"
 #include "MainAux.h"
 
+/*columValid function:
+ * checks if a specific value is valid to insert in the given column.
+ *
+ * parameters-
+ * column-the column to check
+ * row- the row
+ * value- the value you want to check if is valid
+ * board- the game board
+ *
+ */
 int columnValid(int column,int row, char value, char board[][9][2]){
 	int i;
 	for(i=0; i<9; i++){
@@ -16,6 +26,16 @@ int columnValid(int column,int row, char value, char board[][9][2]){
 	return 1;
 }
 
+/* rowValid function:
+ * checks if a specific value is valid to insert in the given row.
+ *
+ * parameters-
+ * column-the column
+ * row- the row to check
+ * value- the value you want to check if is valid
+ * board- the game board
+ *
+ */
 int rowValid(int column, int row, char value, char board[][9][2]){
 	int i;
 	for(i=0; i<9; i++){
@@ -28,6 +48,14 @@ int rowValid(int column, int row, char value, char board[][9][2]){
 	return 1;
 }
 
+/*
+ * squareCheck function:
+ * checks which square is needed, according to the givven row and column.
+ *
+ * parameters-
+ * row- the row to check
+ * column- the column th check.
+ */
 int squareCheck(int column, int row){
 	if(row<3){
 		if(column<3){
@@ -57,7 +85,17 @@ int squareCheck(int column, int row){
 		return 9;
 	}
 }
-
+/* squareValid function:
+ * checks if a specific value is valid to insert in the given square(3x3).
+ * to know which square to check it calls the function checkSquare.
+ *
+ * parameters-
+ * column-the column to check
+ * row- the row  to check
+ * value- the value you want to check if is valid
+ * board- the game board
+ *
+ */
 int squareValid(int column, int row, char value, char board[][9][2]){
 	int square = squareCheck(column,row);
 	int i,j,row1,row2,column1,column2;
@@ -143,6 +181,17 @@ int allValid(int column, int row, char value, char board[][9][2], int whichFuncC
 	return 1;
 }
 
+/* createOptions function:
+ * checks how many options of numbers are valid for the given cell location.
+ * puts all the valid numbers in the tempBoard cell array.
+ * returns the number of options valid for the given cell.
+ *
+ * parameters-
+ * tempBoard- en empty board the function will fill.
+ * row- the row the cell is in
+ * column- the column the cell is in
+ *
+ */
 int createOptions(char tempBoard[][9][10], int row, int col){
 	int i=0, j=0, index=0;
 	char boardForValid[9][9][2];
@@ -167,7 +216,14 @@ int createOptions(char tempBoard[][9][10], int row, int col){
 }
 
 
-
+/*createBoard function:
+ * using randomized backtracking to create a full new Soduko board.
+ * returns 1 if the initialization succeded, and 0 if it didnt.
+ *
+ * parameters-
+ * tempBoard- en empty board the function will fill.
+ *
+ */
 int createBoard(char tempBoard[][9][10]){
 	int row=0, col=0, randomIndex=0, numOfOptions=0, i=0, j=0, temp=0,k=0;
 	char val;
@@ -216,7 +272,14 @@ int createBoard(char tempBoard[][9][10]){
 }
 
 
-
+/* fillGameBoardCells function:
+ * fills the empty gameBoard cells according to the number of fixed cells the user chose.
+ *
+ * parameters-
+ * gameBoard- the empty gameBoard that the function will fill some of its cells
+ * solvedBoard- the full solvedBoard that some of it cells will be copied to the gameBoard.
+ * numOfCellToFill- the number of fixed cells, that the user entered.
+ */
 void fillGameBoardCells(char gameBoard[][9][2],char solvedBoard[][9][2],int numOfCellToFill){
 	int i=0,x=0,y=0,tag=0;
 	for (i=0 ; i<numOfCellToFill; i++) {
@@ -247,6 +310,10 @@ void startBoard (char tempBoard[][9][10],char gameBoard[][9][2],char solvedBoard
 	fillGameBoardCells(gameBoard,solvedBoard,numOfCellToFill);
 }
 
+/*
+ * to delete?????
+
+ */
 int findEmptyCell (char tempBoard[][9][2],int *curRow, int *curColumn,int *prevRow, int *prevColumn){
 	int k,t;
 	for (k=0; k<9; k++){   /*findint the first empty cell*/
